@@ -57,21 +57,6 @@ class _LocationPageState extends State<LocationPage> {
     } catch (e) {
       debugPrint('Unable to get location: $e');
     }
-
-    // final position = await Geolocator.getCurrentPosition(
-    //   locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
-    // );
-
-    // final controller = await _controller.future;
-
-    // await controller.animateCamera(
-    //   CameraUpdate.newCameraPosition(
-    //     CameraPosition(
-    //       target: LatLng(position.latitude, position.longitude),
-    //       zoom: 16,
-    //     ),
-    //   ),
-    // );
   }
 
   Future<void> _requestLocationPermission() async {
