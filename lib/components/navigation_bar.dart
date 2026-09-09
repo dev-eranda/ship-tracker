@@ -38,9 +38,9 @@ class _MainNavigationState extends State<MainNavigation> {
           NavigationDestination(
             // icon: Badge(label: Text('2'), child: Icon(Icons.messenger_sharp)),
             // icon: Badge(child: Icon(Icons.info)),
-            selectedIcon: Icon(Icons.info, color: Colors.white70),
-            icon: Icon(Icons.info_outline),
-            label: 'Support',
+            selectedIcon: Icon(Icons.radar, color: Colors.white70),
+            icon: Icon(Icons.radar_outlined),
+            label: 'Radar',
           ),
         ],
       ),
