@@ -16,46 +16,53 @@ class _LocationPageState extends State<LocationPage> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-  bool _locationGranted = false;
+  // ValueNotifier avoids rebuilding the whole widget tree (including the
+  // GoogleMap, which is expensive) just to toggle the FAB / myLocation flag.
+  final ValueNotifier<bool> _locationGranted = ValueNotifier<bool>(false);
 
   static const CameraPosition _colombo = CameraPosition(
     target: LatLng(6.9271, 79.8612),
     zoom: 14.4746,
   );
 
+  // Guards against overlapping calls if the user taps the FAB repeatedly
+  // before the previous request resolves.
+  bool _isFetchingLocation = false;
+
   Future<void> _goToMyLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-
-      // Check again after returning from settings.
-      serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-      if (!serviceEnabled) {
-        return;
-      }
-    }
+    if (_isFetchingLocation) return;
+    _isFetchingLocation = true;
 
     try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+      if (!serviceEnabled) {
+        await Geolocator.openLocationSettings();
+        serviceEnabled = await Geolocator.isLocationServiceEnabled();
+        if (!serviceEnabled) return;
+      }
+
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
         ),
       );
 
-      final controller = await _controller.future;
+      if (!mounted) return;
 
+      final controller = await _controller.future;
       await controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(position.latitude, position.longitude),
-            zoom: 16,
+            zoom: 17,
           ),
         ),
       );
     } catch (e) {
       debugPrint('Unable to get location: $e');
+    } finally {
+      _isFetchingLocation = false;
     }
   }
 
@@ -65,76 +72,109 @@ class _LocationPageState extends State<LocationPage> {
     if (!mounted) return;
 
     if (status.isGranted) {
-      // App permission is granted.
-      setState(() {
-        _locationGranted = true;
-      });
+      _locationGranted.value = true;
 
-      // Check whether the phone's Location/GPS is actually ON.
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
       if (!serviceEnabled) {
         await Geolocator.openLocationSettings();
       }
-
       return;
     }
 
     if (status.isPermanentlyDenied) {
-      setState(() {
-        _locationGranted = false;
-      });
-
-      // Take the user to Android app settings.
+      _locationGranted.value = false;
       await openAppSettings();
       return;
     }
 
-    // Denied, restricted, or limited.
-    setState(() {
-      _locationGranted = false;
-    });
+    _locationGranted.value = false;
   }
 
   @override
   void initState() {
     super.initState();
-    _requestLocationPermission();
+    // Defer to after first frame so the map renders immediately instead of
+    // waiting on the permission dialog round-trip.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _requestLocationPermission();
+    });
+  }
+
+  @override
+  void dispose() {
+    _locationGranted.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.terrain,
-        initialCameraPosition: _colombo,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+      body: ValueListenableBuilder<bool>(
+        valueListenable: _locationGranted,
+        // The builder only rebuilds this subtree (GoogleMap + FAB),
+        // not the whole Scaffold, and GoogleMap itself is passed in
+        // as `child` so it is NOT rebuilt when _locationGranted changes.
+        builder: (context, granted, child) {
+          return child!;
         },
-        markerType: GoogleMapMarkerType.marker,
-        zoomControlsEnabled: false,
-        myLocationEnabled: _locationGranted,
-        myLocationButtonEnabled: false,
+        child: _MapWithLocationButton(
+          controller: _controller,
+          initialCameraPosition: _colombo,
+          locationGranted: _locationGranted,
+          onLocateMe: _goToMyLocation,
+        ),
       ),
-
-      floatingActionButton: _locationGranted
-          ? FloatingActionButton(
-              onPressed: _goToMyLocation,
-              child: const Icon(Icons.my_location),
-            )
-          : null,
     );
   }
 }
 
-// static const CameraPosition _kLake = CameraPosition(
-//   bearing: 192.8334901395799,
-//   target: LatLng(37.43296265331129, -122.08832357078792),
-//   tilt: 59.440717697143555,
-//   zoom: 19.151926040649414,
-// );
+/// Split out so GoogleMap's expensive build/param diffing isn't retriggered
+/// by unrelated state changes higher up the tree. myLocationEnabled and the
+/// FAB visibility are read from the ValueListenableBuilder here, scoped
+/// tightly to just what needs it.
+class _MapWithLocationButton extends StatelessWidget {
+  const _MapWithLocationButton({
+    required this.controller,
+    required this.initialCameraPosition,
+    required this.locationGranted,
+    required this.onLocateMe,
+  });
 
-// Future<void> _goToTheLake() async {
-//   final GoogleMapController controller = await _controller.future;
-//   await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-// }
+  final Completer<GoogleMapController> controller;
+  final CameraPosition initialCameraPosition;
+  final ValueNotifier<bool> locationGranted;
+  final VoidCallback onLocateMe;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: locationGranted,
+      builder: (context, granted, _) {
+        return Stack(
+          children: [
+            GoogleMap(
+              mapType: MapType.terrain,
+              initialCameraPosition: initialCameraPosition,
+              onMapCreated: (GoogleMapController c) {
+                if (!controller.isCompleted) controller.complete(c);
+              },
+              markerType: GoogleMapMarkerType.marker,
+              zoomControlsEnabled: false,
+              myLocationEnabled: granted,
+              myLocationButtonEnabled: false,
+            ),
+            if (granted)
+              Positioned(
+                right: 16,
+                bottom: 16,
+                child: FloatingActionButton(
+                  onPressed: onLocateMe,
+                  child: const Icon(Icons.my_location),
+                ),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
