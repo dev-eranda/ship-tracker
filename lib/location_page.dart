@@ -55,7 +55,7 @@ class _LocationPageState extends State<LocationPage> {
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(position.latitude, position.longitude),
-            zoom: 18,
+            zoom: 20,
           ),
         ),
       );
