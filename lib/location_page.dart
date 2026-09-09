@@ -55,7 +55,7 @@ class _LocationPageState extends State<LocationPage> {
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(position.latitude, position.longitude),
-            zoom: 17,
+            zoom: 18,
           ),
         ),
       );
@@ -153,7 +153,7 @@ class _MapWithLocationButton extends StatelessWidget {
         return Stack(
           children: [
             GoogleMap(
-              mapType: MapType.terrain,
+              mapType: MapType.normal,
               initialCameraPosition: initialCameraPosition,
               onMapCreated: (GoogleMapController c) {
                 if (!controller.isCompleted) controller.complete(c);

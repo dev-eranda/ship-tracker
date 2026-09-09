@@ -31,9 +31,9 @@ class _MainNavigationState extends State<MainNavigation> {
             label: 'Home',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.near_me, color: Colors.white70),
-            icon: Icon(Icons.near_me_outlined),
-            label: 'Location',
+            selectedIcon: Icon(Icons.location_on, color: Colors.white70),
+            icon: Icon(Icons.location_on_outlined),
+            label: 'Explore',
           ),
           NavigationDestination(
             // icon: Badge(label: Text('2'), child: Icon(Icons.messenger_sharp)),
