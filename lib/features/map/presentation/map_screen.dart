@@ -115,7 +115,9 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           // ── Recenter button ─────────────────────────────
           Positioned(
             right: 16,
-            bottom: selectedVessel != null ? 270 : 24,
+            bottom: selectedVessel != null
+                ? MediaQuery.of(context).size.height * 0.32
+                : MediaQuery.of(context).size.height * 0.03,
             child: FloatingActionButton(
               heroTag: 'recenter',
               mini: true,
