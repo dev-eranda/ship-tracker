@@ -35,11 +35,11 @@ flutter_native_splash:
   color_dark: "#0A2472"
 
   # Legacy Android (<12) and iOS both use this
-  image: assets/images/splash_logo_ios.png
+  # image: assets/images/splash_logo_ios.png
 
-  android_12:
-    image: assets/images/splash_logo_android.png # 960x960, boat centered within 640px safe zone
-    icon_background_color: "#0A2472"
-    icon_background_color_dark: "#0A2472"
+  # android_12:
+  # image: assets/images/splash_logo_android.png # 960x960, boat centered within 640px safe zone
+  # icon_background_color: "#0A2472"
+  # icon_background_color_dark: "#0A2472"
 
-  web: false
+  # web: false
