@@ -49,6 +49,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 options: MarkerClusterLayerOptions(
                   maxClusterRadius: 45,
                   size: const Size(40, 40),
+                  //  Hide the polygon drawn around clustered markers
+                  showPolygon: false,
                   markers: vessels.map((vessel) {
                     return Marker(
                       point: LatLng(vessel.latitude, vessel.longitude),
