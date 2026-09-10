@@ -12,6 +12,11 @@ dependencies:
   geolocator: ^14.0.3
   google_maps_flutter: ^2.18.0
   permission_handler: ^12.0.3
+  flutter_map: ^7.0.2 # OSM-based map, free, no API key needed
+  latlong2: ^0.9.1 # LatLng type used by flutter_map
+  flutter_map_marker_cluster: ^1.4.0 # clustering for dense marker areas
+  http: ^1.2.2 # for calling your backend/MarineTraffic proxy later
+  flutter_riverpod: ^2.6.1 # state management
 
 dev_dependencies:
   flutter_test:
