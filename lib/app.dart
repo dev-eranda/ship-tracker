@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ship_tracker/features/search/presentation/search_screen.dart';
 
 import 'core/theme/app_theme.dart';
 import 'features/splash/splash_screen.dart';
@@ -17,6 +18,7 @@ class VesselTrackerApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(),
         '/home': (context) => const MapScreen(),
+        '/search': (context) => const SearchScreen(),
       },
     );
   }
