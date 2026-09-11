@@ -13,7 +13,7 @@ class VesselTrackerApp extends StatelessWidget {
       title: 'Vessel Tracker',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
         '/': (context) => const SplashScreen(),
         '/home': (context) => const MapScreen(),
