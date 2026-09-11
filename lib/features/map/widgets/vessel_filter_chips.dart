@@ -34,7 +34,7 @@ class VesselFilterChips extends ConsumerWidget {
               }
               ref.read(activeFiltersProvider.notifier).state = current;
             },
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.white,
             selectedColor: Theme.of(context).colorScheme.primary
                 .withValues(alpha: 0.15),
             checkmarkColor: Theme.of(context).colorScheme.primary,

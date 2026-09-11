@@ -5,17 +5,19 @@ class AppColors {
   static const Color skyBlue = Color(0xFF0E6BA8);
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF5F7FA);
+  static const Color surface = Color(0xFFFDFDFD);
 }
 
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      scaffoldBackgroundColor: AppColors.background,
+      // scaffoldBackgroundColor: AppColors.background,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.oceanBlue,
         primary: AppColors.oceanBlue,
         secondary: AppColors.skyBlue,
+        // surface: AppColors.surface,
       ),
       fontFamily: 'Roboto',
     );
