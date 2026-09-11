@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/models/vessel.dart';
 import '../../map/providers/vessel_provider.dart';
 
-/// Current text typed in to the search bar.
+/// Current text typed into the search bar.
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
 /// Active type filter for the search/list screen (single-select here,
@@ -27,12 +27,10 @@ class RecentSearchesNotifier extends StateNotifier<List<String>> {
   void add(String term) {
     final trimmed = term.trim();
     if (trimmed.isEmpty) return;
-
     final updated = [
       trimmed,
       ...state.where((t) => t.toLowerCase() != trimmed.toLowerCase()),
     ];
-
     state = updated.take(_maxEntries).toList();
   }
 
