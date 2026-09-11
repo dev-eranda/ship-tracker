@@ -97,8 +97,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               child: Column(
                 children: [
                   MapSearchBar(
-                    onChanged: (query) {
-                      // TODO (later): wire real search/filter-by-name logic.
+                    onSearchTap: () {
+                      Navigator.of(context).pushNamed('/search');
                     },
                     onMenuTap: () {
                       // TODO (later): open drawer / fleet screen.

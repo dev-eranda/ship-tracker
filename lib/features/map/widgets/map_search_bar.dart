@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MapSearchBar extends StatelessWidget {
-  final ValueChanged<String> onChanged;
+  final VoidCallback onSearchTap;
   final VoidCallback onMenuTap;
   final VoidCallback onSettingsTap;
 
   const MapSearchBar({
     super.key,
-    required this.onChanged,
+    required this.onSearchTap,
     required this.onMenuTap,
     required this.onSettingsTap,
   });
@@ -34,14 +34,18 @@ class MapSearchBar extends StatelessWidget {
             onPressed: onMenuTap,
           ),
           Expanded(
-            child: TextField(
-              onChanged: onChanged,
-              decoration: const InputDecoration(
-                hintText: 'Search vessels, MMSI, IMO...',
-                border: InputBorder.none,
-                hintStyle: TextStyle(fontSize: 14),
+            child: InkWell(
+              onTap: onSearchTap,
+              child: Row(
+                children: [
+                  Icon(Icons.search, size: 18, color: Colors.grey.shade500),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Search vessels, MMSI, IMO...',
+                    style: TextStyle(fontSize: 14, color: Colors.grey.shade500),
+                  ),
+                ],
               ),
-              style: const TextStyle(fontSize: 14),
             ),
           ),
           IconButton(
