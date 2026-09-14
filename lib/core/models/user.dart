@@ -8,4 +8,4 @@ class User {
   bool get isAdmin => role == UserRole.admin;
 }
 
-enum UserRole { admin, user, guest }
+enum UserRole { admin, user }

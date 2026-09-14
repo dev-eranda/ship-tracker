@@ -14,11 +14,5 @@ class DevUsers {
     role: UserRole.user,
   );
 
-  static const guest = User(
-    id: 'u_guest_1',
-    name: 'Guest',
-    role: UserRole.guest,
-  );
-
-  static const all = [admin, regular, guest];
+  static const all = [admin, regular];
 }
