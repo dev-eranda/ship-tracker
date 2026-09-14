@@ -5,8 +5,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:ship_tracker/core/theme/app_theme.dart';
 import 'package:ship_tracker/features/map/providers/vessel_provider.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
-import 'package:ship_tracker/features/map/widgets/map_search_bar.dart';
-import 'package:ship_tracker/features/map/widgets/vessel_filter_chips.dart';
 import 'package:ship_tracker/features/map/widgets/vessel_marker.dart';
 import 'package:ship_tracker/features/map/widgets/vessel_preview_sheet.dart';
 
@@ -19,7 +17,7 @@ class MapScreen extends ConsumerStatefulWidget {
 
 class _MapScreenState extends ConsumerState<MapScreen> {
   final MapController _mapController = MapController();
-  static const LatLng _initialCenter = LatLng(1.29, 103.85); // Singapore Strait
+  static const LatLng _initialCenter = LatLng(6.9497, 79.8425);
 
   @override
   Widget build(BuildContext context) {
@@ -88,30 +86,6 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 ),
               ),
             ],
-          ),
-
-          // ── Top overlay: search bar + filter chips ──────
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              child: Column(
-                children: [
-                  MapSearchBar(
-                    onSearchTap: () {
-                      Navigator.of(context).pushNamed('/search');
-                    },
-                    onMenuTap: () {
-                      // TODO (later): open drawer / fleet screen.
-                    },
-                    onSettingsTap: () {
-                      // TODO (later): navigate to settings screen.
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  const VesselFilterChips(),
-                ],
-              ),
-            ),
           ),
 
           // ── Recenter button ─────────────────────────────

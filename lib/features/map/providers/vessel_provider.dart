@@ -7,18 +7,18 @@ import '../../../core/models/vessel.dart';
 /// behavior before Phase 3 wires in real MarineTraffic data.
 final List<Vessel> _mockVessels = [
   // ─────────────────────────────────────────────
-  // Cluster 1 - Singapore Strait / East
+  // Cluster 1 - West of Colombo
   // ─────────────────────────────────────────────
   Vessel(
     mmsi: '563012345',
     imo: '9321483',
     name: 'PACIFIC VOYAGER',
     type: VesselType.cargo,
-    latitude: 1.245,
-    longitude: 104.020,
+    latitude: 6.920,
+    longitude: 79.720,
     speedKnots: 14.2,
     courseDegrees: 45,
-    destination: 'SINGAPORE',
+    destination: 'COLOMBO',
     lastReport: DateTime.now().subtract(const Duration(minutes: 3)),
   ),
   Vessel(
@@ -26,128 +26,84 @@ final List<Vessel> _mockVessels = [
     imo: '9321484',
     name: 'NORDIC STAR',
     type: VesselType.tanker,
-    latitude: 1.250,
-    longitude: 104.030,
+    latitude: 6.930,
+    longitude: 79.730,
     speedKnots: 8.5,
     courseDegrees: 120,
-    destination: 'JURONG PORT',
+    destination: 'COLOMBO PORT',
     lastReport: DateTime.now().subtract(const Duration(minutes: 1)),
   ),
   Vessel(
     mmsi: '563012347',
     name: 'ISLAND FERRY 3',
     type: VesselType.passenger,
-    latitude: 1.238,
-    longitude: 104.015,
+    latitude: 6.910,
+    longitude: 79.725,
     speedKnots: 18.0,
     courseDegrees: 200,
-    destination: 'BATAM',
+    destination: 'GALLE',
     lastReport: DateTime.now().subtract(const Duration(seconds: 45)),
   ),
 
   // ─────────────────────────────────────────────
-  // Cluster 2 - South of Singapore
+  // Cluster 2 - South-West of Colombo
   // ─────────────────────────────────────────────
-  Vessel(
-    mmsi: '563012348',
-    imo: '9321485',
-    name: 'MAERSK HORIZON',
-    type: VesselType.cargo,
-    latitude: 1.170,
-    longitude: 103.900,
-    speedKnots: 16.7,
-    courseDegrees: 270,
-    destination: 'PORT KLANG',
-    lastReport: DateTime.now().subtract(const Duration(minutes: 5)),
-  ),
   Vessel(
     mmsi: '563012349',
     name: 'BLUE MARLIN',
     type: VesselType.fishing,
-    latitude: 1.165,
-    longitude: 103.910,
+    latitude: 6.770,
+    longitude: 79.715,
     speedKnots: 5.1,
     courseDegrees: 90,
-    destination: 'BATAM',
+    destination: 'BERUWALA',
     lastReport: DateTime.now().subtract(const Duration(minutes: 12)),
-  ),
-  Vessel(
-    mmsi: '563012350',
-    imo: '9321486',
-    name: 'GULF EXPLORER',
-    type: VesselType.tanker,
-    latitude: 1.180,
-    longitude: 103.895,
-    speedKnots: 11.3,
-    courseDegrees: 30,
-    destination: 'RAFFLES ANCHORAGE',
-    lastReport: DateTime.now().subtract(const Duration(minutes: 2)),
   ),
 
   // ─────────────────────────────────────────────
-  // Cluster 3 - West / Singapore Strait
+  // Cluster 3 - North-West of Colombo
   // ─────────────────────────────────────────────
-  Vessel(
-    mmsi: '563012351',
-    imo: '9321487',
-    name: 'OCEAN TRADER',
-    type: VesselType.cargo,
-    latitude: 1.210,
-    longitude: 103.650,
-    speedKnots: 13.4,
-    courseDegrees: 85,
-    destination: 'SINGAPORE',
-    lastReport: DateTime.now().subtract(const Duration(minutes: 4)),
-  ),
-  Vessel(
-    mmsi: '563012352',
-    name: 'SEA BREEZE',
-    type: VesselType.fishing,
-    latitude: 1.215,
-    longitude: 103.660,
-    speedKnots: 6.2,
-    courseDegrees: 110,
-    destination: 'BATAM',
-    lastReport: DateTime.now().subtract(const Duration(minutes: 8)),
-  ),
   Vessel(
     mmsi: '563012353',
     imo: '9321488',
     name: 'EASTERN GLORY',
     type: VesselType.tanker,
-    latitude: 1.205,
-    longitude: 103.645,
+    latitude: 7.040,
+    longitude: 79.710,
     speedKnots: 10.8,
     courseDegrees: 260,
-    destination: 'PORT KLANG',
+    destination: 'COLOMBO PORT',
     lastReport: DateTime.now().subtract(const Duration(minutes: 2)),
   ),
 
   // ─────────────────────────────────────────────
-  // Isolated vessel - useful for testing
+  // Isolated vessel - South of Colombo
   // ─────────────────────────────────────────────
   Vessel(
     mmsi: '563012354',
     imo: '9321489',
     name: 'SOUTHERN CROSS',
     type: VesselType.cargo,
-    latitude: 1.050,
-    longitude: 104.150,
+    latitude: 6.550,
+    longitude: 79.650,
     speedKnots: 15.6,
     courseDegrees: 320,
-    destination: 'SINGAPORE',
+    destination: 'COLOMBO',
     lastReport: DateTime.now().subtract(const Duration(minutes: 6)),
   ),
 
+  // ─────────────────────────────────────────────
+  // Isolated vessel - North of Colombo
+  // ─────────────────────────────────────────────
   Vessel(
     mmsi: '563012355',
     name: 'COASTAL RUNNER',
     type: VesselType.passenger,
-    latitude: 1.080,
-    longitude: 103.720,
+    latitude: 7.180,
+    longitude: 79.650,
     speedKnots: 19.2,
     courseDegrees: 40,
-    destination: 'BATAM',
+    destination: 'NEGOMBO',
     lastReport: DateTime.now().subtract(const Duration(minutes: 2)),
   ),
 ];
