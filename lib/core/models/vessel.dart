@@ -13,6 +13,7 @@ class Vessel {
   final double speedKnots;
   final double courseDegrees; // direction of travel, for marker rotation
   final String? destination;
+  final VesselStatus status;
   final DateTime lastReport;
 
   const Vessel({
@@ -25,8 +26,22 @@ class Vessel {
     required this.speedKnots,
     required this.courseDegrees,
     this.destination,
+    required this.status,
     required this.lastReport,
   });
+}
+
+enum VesselStatus { active, docked }
+
+extension VesselStatusLabel on VesselStatus {
+  String get label {
+    switch (this) {
+      case VesselStatus.active:
+        return 'Active';
+      case VesselStatus.docked:
+        return 'Docked';
+    }
+  }
 }
 
 enum VesselType {

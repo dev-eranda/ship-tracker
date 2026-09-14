@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ship_tracker/features/Profile/presentation/profile_screen.dart';
 import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
 import 'package:ship_tracker/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:ship_tracker/features/navigation/provider/nav_provider.dart';
@@ -26,10 +27,7 @@ class MainShell extends ConsumerWidget {
         label: 'Profile',
         icon: Icons.person_outline,
         activeIcon: Icons.person,
-        screen: Scaffold(
-          appBar: AppBar(title: const Text('Profile')),
-          body: const Center(child: Text('Profile content here')),
-        ),
+        screen: ProfileScreen(),
       ),
       if (isAdmin)
         _TabItem(

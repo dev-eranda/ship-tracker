@@ -14,7 +14,7 @@ class DashboardScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Admin Dashboard')),
+      appBar: AppBar(title: const Text('Dashboard')),
       body: const Center(child: Text('Admin content here')),
     );
   }

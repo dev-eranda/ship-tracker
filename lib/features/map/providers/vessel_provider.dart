@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../core/models/vessel.dart';
+import 'package:ship_tracker/core/models/vessel.dart';
 
 /// Mock vessel data around a busy shipping lane (Singapore Strait area)
 /// so markers appear naturally clustered — good for testing clustering
@@ -19,6 +18,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 14.2,
     courseDegrees: 45,
     destination: 'COLOMBO',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(minutes: 3)),
   ),
   Vessel(
@@ -31,6 +31,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 8.5,
     courseDegrees: 120,
     destination: 'COLOMBO PORT',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(minutes: 1)),
   ),
   Vessel(
@@ -42,6 +43,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 18.0,
     courseDegrees: 200,
     destination: 'GALLE',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(seconds: 45)),
   ),
 
@@ -57,6 +59,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 5.1,
     courseDegrees: 90,
     destination: 'BERUWALA',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(minutes: 12)),
   ),
 
@@ -73,6 +76,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 10.8,
     courseDegrees: 260,
     destination: 'COLOMBO PORT',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(minutes: 2)),
   ),
 
@@ -89,6 +93,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 15.6,
     courseDegrees: 320,
     destination: 'COLOMBO',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(minutes: 6)),
   ),
 
@@ -104,6 +109,7 @@ final List<Vessel> _mockVessels = [
     speedKnots: 19.2,
     courseDegrees: 40,
     destination: 'NEGOMBO',
+    status: VesselStatus.active,
     lastReport: DateTime.now().subtract(const Duration(minutes: 2)),
   ),
 ];
