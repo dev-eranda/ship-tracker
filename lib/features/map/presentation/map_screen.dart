@@ -35,8 +35,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               initialCenter: _initialCenter,
               initialZoom: 11,
               minZoom: 3,
-              maxZoom: 16,
-              onTap: (_, __) {
+              maxZoom: 17,
+              onTap: (_, _) {
                 ref.watch(selectedVesselProvider.notifier).state = null;
               },
             ),
