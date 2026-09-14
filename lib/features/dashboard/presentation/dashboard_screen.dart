@@ -1,15 +1,21 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isAdmin = ref.watch(isAdminProvider);
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+    if (!isAdmin) {
+      return const Scaffold(body: Center(child: Text('Access denied')));
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Admin Dashboard')),
+      body: const Center(child: Text('Admin content here')),
+    );
   }
 }
