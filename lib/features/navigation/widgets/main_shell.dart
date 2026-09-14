@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
 import 'package:ship_tracker/features/dashboard/presentation/dashboard_screen.dart';
-import 'package:ship_tracker/features/dashboard/provider/nav_provider.dart';
+import 'package:ship_tracker/features/navigation/provider/nav_provider.dart';
 import 'package:ship_tracker/features/map/presentation/map_screen.dart';
 
 class MainShell extends ConsumerWidget {
@@ -13,12 +13,23 @@ class MainShell extends ConsumerWidget {
     final isAdmin = ref.watch(isAdminProvider);
     final currentIndex = ref.watch(navIndexProvider);
 
+    print(isAdmin);
+
     final tabs = <_TabItem>[
       _TabItem(
         label: 'Map',
         icon: Icons.map_outlined,
         activeIcon: Icons.map,
         screen: MapScreen(),
+      ),
+      _TabItem(
+        label: 'Profile',
+        icon: Icons.person_outline,
+        activeIcon: Icons.person,
+        screen: Scaffold(
+          appBar: AppBar(title: const Text('Profile')),
+          body: const Center(child: Text('Profile content here')),
+        ),
       ),
       if (isAdmin)
         _TabItem(

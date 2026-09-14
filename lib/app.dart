@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ship_tracker/main_shell.dart';
+import 'package:ship_tracker/features/navigation/widgets/main_shell.dart';
 
 import 'core/theme/app_theme.dart';
 import 'features/splash/splash_screen.dart';
