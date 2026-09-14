@@ -1,17 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-enum UserRole { admin, user, guest }
-
-class AppUser {
-  final String id;
-  final String name;
-  final UserRole role;
-  const AppUser({required this.id, required this.name, required this.role});
-  bool get isAdmin => role == UserRole.admin;
-}
+import 'package:ship_tracker/core/models/user.dart';
 
 class AuthState {
-  final AppUser? user;
+  final User? user;
   const AuthState({this.user});
   bool get isAdmin => user?.isAdmin ?? true;
 }
@@ -19,7 +10,7 @@ class AuthState {
 class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier() : super(const AuthState());
 
-  void login(AppUser user) {
+  void login(User user) {
     state = AuthState(user: user);
   }
 

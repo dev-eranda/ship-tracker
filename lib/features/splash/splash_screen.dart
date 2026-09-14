@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // TODO (Phase 2+): replace with real auth-state check.
     // For now this always routes to a placeholder Home screen.
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.of(context).pushReplacementNamed('/login');
   }
 
   Future<void> _runStartupTasks() async {

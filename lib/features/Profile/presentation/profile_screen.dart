@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ship_tracker/core/models/user.dart';
 import 'package:ship_tracker/core/models/vessel.dart';
 import 'package:ship_tracker/features/Profile/provider/vessel_provider.dart';
 import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
@@ -12,53 +13,51 @@ class ProfileScreen extends ConsumerWidget {
     final user = ref.watch(authProvider).user;
     final vesselsAsync = ref.watch(assignedVesselsProvider);
 
-    if (user == null) {
-      const Center(child: Text('not logged in'));
-    }
-
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
-      body: RefreshIndicator(
-        onRefresh: () => ref.refresh(assignedVesselsProvider.future),
-        child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _UserCard(user: user!),
-            const SizedBox(height: 24),
-            Text(
-              'Assign Vessels',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 8),
-            vesselsAsync.when(
-              data: (vessels) => vessels.isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: Text('No vessels assigned'),
-                    )
-                  : Column(
-                      children: vessels
-                          .map((v) => _VesselTile(vessel: v))
-                          .toList(),
+      body: user == null
+          ? const Center(child: Text('Not logged in'))
+          : RefreshIndicator(
+              onRefresh: () => ref.refresh(assignedVesselsProvider.future),
+              child: ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  _UserCard(user: user),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Assign Vessels',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  vesselsAsync.when(
+                    data: (vessels) => vessels.isEmpty
+                        ? const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            child: Text('No vessels assigned'),
+                          )
+                        : Column(
+                            children: vessels
+                                .map((v) => _VesselTile(vessel: v))
+                                .toList(),
+                          ),
+                    loading: () => const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 24),
+                      child: Center(child: CircularProgressIndicator()),
                     ),
-              loading: () => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: Center(child: CircularProgressIndicator()),
-              ),
-              error: (err, stack) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text('Failed to load vessels: $err'),
+                    error: (err, stack) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text('Failed to load vessels: $err'),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
 
 class _UserCard extends StatelessWidget {
-  final AppUser user; // replace `dynamic` with your AppUser type
+  final User user;
   const _UserCard({required this.user});
 
   @override

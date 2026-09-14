@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ship_tracker/features/Profile/presentation/profile_screen.dart';
+import 'package:ship_tracker/features/auth/presentation/login_screen.dart';
 import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
 import 'package:ship_tracker/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:ship_tracker/features/navigation/provider/nav_provider.dart';
@@ -13,8 +14,6 @@ class MainShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isAdmin = ref.watch(isAdminProvider);
     final currentIndex = ref.watch(navIndexProvider);
-
-    print(isAdmin);
 
     final tabs = <_TabItem>[
       _TabItem(
@@ -36,6 +35,12 @@ class MainShell extends ConsumerWidget {
           activeIcon: Icons.admin_panel_settings,
           screen: const DashboardScreen(),
         ),
+      _TabItem(
+        label: 'Login',
+        icon: Icons.login_outlined,
+        activeIcon: Icons.login,
+        screen: LoginScreen(),
+      ),
     ];
 
     final safeIndex = currentIndex < tabs.length ? currentIndex : 0;
