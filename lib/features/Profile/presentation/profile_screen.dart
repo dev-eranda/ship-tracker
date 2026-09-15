@@ -7,7 +7,7 @@ import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
 Color _getVesselStatusColor(VesselStatus status) {
   return switch (status) {
     VesselStatus.active => Colors.green,
-    VesselStatus.docked => Colors.blue,
+    VesselStatus.docked => Colors.black,
   };
 }
 
