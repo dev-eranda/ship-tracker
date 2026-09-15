@@ -35,12 +35,12 @@ class MainShell extends ConsumerWidget {
           activeIcon: Icons.admin_panel_settings,
           screen: const DashboardScreen(),
         ),
-      _TabItem(
-        label: 'Login',
-        icon: Icons.login_outlined,
-        activeIcon: Icons.login,
-        screen: LoginScreen(),
-      ),
+      // _TabItem(
+      //   label: 'Login',
+      //   icon: Icons.login_outlined,
+      //   activeIcon: Icons.login,
+      //   screen: LoginScreen(),
+      // ),
     ];
 
     final safeIndex = currentIndex < tabs.length ? currentIndex : 0;

@@ -37,9 +37,15 @@ class ProfileScreen extends ConsumerWidget {
               vesselsAsync.when(
                 data: (vessels) {
                   if (vessels.isEmpty) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: Text('No vessels assigned'),
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      child: Text(
+                        'No vessels assigned',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                      ),
                     );
                   }
 
