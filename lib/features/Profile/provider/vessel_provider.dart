@@ -8,7 +8,7 @@ final assignedVesselsProvider = FutureProvider((ref) async {
     Vessel(
       mmsi: '563012354',
       imo: '9321489',
-      name: 'SOUTHERN CROSS',
+      name: 'Southern Cross',
       type: VesselType.cargo,
       latitude: 6.550,
       longitude: 79.650,
@@ -21,14 +21,14 @@ final assignedVesselsProvider = FutureProvider((ref) async {
     Vessel(
       mmsi: '563012355',
       imo: '',
-      name: 'COASTAL RUNNER',
+      name: 'Coastal Runner',
       type: VesselType.passenger,
       latitude: 7.180,
       longitude: 79.650,
       speedKnots: 19.2,
       courseDegrees: 40,
       destination: 'NEGOMBO',
-      status: VesselStatus.active,
+      status: VesselStatus.docked,
       lastReport: DateTime.now().subtract(const Duration(minutes: 2)),
     ),
   ];

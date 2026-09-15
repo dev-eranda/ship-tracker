@@ -31,9 +31,10 @@ class Vessel {
   });
 }
 
-enum VesselStatus { active, docked }
+enum VesselStatus {
+  active,
+  docked;
 
-extension VesselStatusLabel on VesselStatus {
   String get label {
     switch (this) {
       case VesselStatus.active:
@@ -43,6 +44,17 @@ extension VesselStatusLabel on VesselStatus {
     }
   }
 }
+
+// extension VesselStatusLabel on VesselStatus {
+//   String get label {
+//     switch (this) {
+//       case VesselStatus.active:
+//         return 'Active';
+//       case VesselStatus.docked:
+//         return 'Docked';
+//     }
+//   }
+// }
 
 enum VesselType {
   cargo,
