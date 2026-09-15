@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ship_tracker/core/models/vessel.dart';
 
 final assignedVesselsProvider = FutureProvider((ref) async {
-  await Future.delayed(const Duration(milliseconds: 400));
+  await Future.delayed(const Duration(milliseconds: 3000));
 
   return [
     Vessel(
