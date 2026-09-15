@@ -100,13 +100,6 @@ class ProfileScreen extends ConsumerWidget {
               ),
               _buildSettingTile(
                 context,
-                icon: Icons.security,
-                title: 'Two-Factor Authentication',
-                subtitle: 'Enabled',
-                onTap: () {},
-              ),
-              _buildSettingTile(
-                context,
                 icon: Icons.key,
                 title: 'Active Sessions',
                 subtitle: '2 devices',
