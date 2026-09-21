@@ -1,7 +1,7 @@
 enum UserRole { admin, user }
 
 class User {
-  final String id;
+  final int id;
   final String name;
   final UserRole role;
 
@@ -10,7 +10,7 @@ class User {
   bool get isAdmin => role == UserRole.admin;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json['id'] as String,
+    id: json['id'] as int,
     name: (json['name'] ?? json['username'] ?? '') as String,
     role: _parseRole(json['role']),
   );

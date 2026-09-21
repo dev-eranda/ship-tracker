@@ -29,6 +29,30 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     super.dispose();
   }
 
+  Future<void> _onUserSelect(User? user) async {
+    if (user == null) return;
+
+    try {
+      final notifier = ref.read(assignmentProvider.notifier);
+
+      await notifier.selectUser(user);
+
+      if (!mounted) return;
+
+      final state = ref.read(assignmentProvider);
+
+      if (state.error != null) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.error!)));
+      }
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Failed to select user: $e')));
+    }
+  }
+
   Future<void> _submit() async {
     final notifier = ref.read(assignmentProvider.notifier);
     final ok = await notifier.save();
@@ -84,13 +108,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         children: [
           // ---- User dropdown ----
           DropdownButtonFormField<User>(
-            value: s.selectedUser,
+            initialValue: s.selectedUser,
             isExpanded: true,
+            menuMaxHeight: 300,
             decoration: const InputDecoration(
               labelText: 'Select user',
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.person),
             ),
+            icon: const Icon(Icons.keyboard_arrow_down),
             items: s.users
                 .map(
                   (u) => DropdownMenuItem(
@@ -99,7 +125,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ),
                 )
                 .toList(),
-            onChanged: notifier.selectUser,
+            onChanged: _onUserSelect,
           ),
           const SizedBox(height: 16),
 

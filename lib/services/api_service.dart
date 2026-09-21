@@ -54,7 +54,9 @@ class ApiService {
 
     final body = jsonDecode(res.body);
     final list = body is List ? body : (body['data'] as List);
+
     return list.map((e) => User.fromJson(e)).toList();
+    // return list.map((e) => User.fromJson(e as Map<String, dynamic>)).toList();
   }
 
   Future<List<Vessel>> fetchVessels() async {
@@ -72,7 +74,7 @@ class ApiService {
     return list.map((e) => Vessel.fromJson(e)).toList();
   }
 
-  Future<List<int>> fetchAssignedVesselIds(String userId) async {
+  Future<List<int>> fetchAssignedVesselIds(int userId) async {
     final res = await http.get(
       Uri.parse('$baseUrl/users/$userId/vessels'),
       headers: await _headers(),
@@ -83,7 +85,7 @@ class ApiService {
     return list.map<int>((e) => e['id'] as int).toList();
   }
 
-  Future<void> assignVessels(String userId, List<int> vesselIds) async {
+  Future<void> assignVessels(int userId, List<int> vesselIds) async {
     final res = await http.post(
       Uri.parse('$baseUrl/users/$userId/vessels'),
       headers: await _headers(),

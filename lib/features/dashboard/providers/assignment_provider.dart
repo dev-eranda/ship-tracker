@@ -74,20 +74,32 @@ class AssignmentNotifier extends Notifier<AssignmentState> {
   @override
   AssignmentState build() => const AssignmentState();
 
+  // Future<void> loadInitial() async {
+  //   state = state.copyWith(loading: true, clearError: true);
+  //   try {
+  //     final results = await Future.wait([
+  //       _api.fetchUsers(),
+  //       _api.fetchVessels(),
+  //     ]);
+  //     state = state.copyWith(
+  //       users: results as List<User>,
+  //       vessels: results[1] as List<Vessel>,
+  //       loading: false,
+  //     );
+  //   } catch (e) {
+  //     state = state.copyWith(loading: false, error: e.toString());
+  //     print(e.toString());
+  //   }
+  // }
+
   Future<void> loadInitial() async {
     state = state.copyWith(loading: true, clearError: true);
     try {
-      final results = await Future.wait([
-        _api.fetchUsers(),
-        // _api.fetchVessels(),
-      ]);
-      state = state.copyWith(
-        users: results as List<User>,
-        // vessels: results[1] as List<Vessel>,
-        loading: false,
-      );
+      final results = await Future.wait([_api.fetchUsers()]);
+      state = state.copyWith(users: results[0], loading: false);
     } catch (e) {
       state = state.copyWith(loading: false, error: e.toString());
+      print(e.toString());
     }
   }
 
