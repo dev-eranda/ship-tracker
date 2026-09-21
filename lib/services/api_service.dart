@@ -45,7 +45,7 @@ class ApiService {
   Future<List<User>> fetchUsers() async {
     final res = await http.get(
       Uri.parse('$baseUrl/users'),
-      headers: await _headers(),
+      // headers: await _headers(),
     );
 
     if (res.statusCode != 200) {

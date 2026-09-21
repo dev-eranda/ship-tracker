@@ -10,12 +10,12 @@ import '../../../services/api_service.dart';
 /// Plug in your real auth token source here.
 final authTokenProvider = Provider<Future<String?> Function()>(
   (ref) =>
-      () async => null, // TODO: return your stored token
+      () async => null,
 );
 
 final assignmentApiProvider = Provider<ApiService>((ref) {
   return ApiService(
-    baseUrl: 'https://your-api.com/api', // TODO: your base URL
+    baseUrl: 'https://jsonplaceholder.typicode.com',
     getToken: ref.watch(authTokenProvider),
   );
 });
@@ -79,11 +79,11 @@ class AssignmentNotifier extends Notifier<AssignmentState> {
     try {
       final results = await Future.wait([
         _api.fetchUsers(),
-        _api.fetchVessels(),
+        // _api.fetchVessels(),
       ]);
       state = state.copyWith(
-        users: results[0] as List<User>,
-        vessels: results[1] as List<Vessel>,
+        users: results as List<User>,
+        // vessels: results[1] as List<Vessel>,
         loading: false,
       );
     } catch (e) {

@@ -4,28 +4,6 @@ import 'package:ship_tracker/core/models/user.dart';
 // import 'package:ship_tracker/features/auth/provider/auth_provider.dart';
 import 'package:ship_tracker/features/dashboard/providers/assignment_provider.dart';
 
-// class DashboardScreen extends ConsumerWidget {
-//   const DashboardScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final isAdmin = ref.watch(isAdminProvider);
-
-//     if (!isAdmin) {
-//       return Scaffold(body: Center(child: Text('Access denied')));
-//     }
-
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Dashboard')),
-//       body: ListView(children: [_buildHeader(context), const Divider()]),
-//     );
-//   }
-
-//   Widget _buildHeader(BuildContext context) {
-//     return Container();
-//   }
-// }
-
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
@@ -89,30 +67,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
             )
           : _buildForm(s, notifier),
-      bottomNavigationBar: s.loading
-          ? null
-          : SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: SizedBox(
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: (s.selectedUser == null || s.saving)
-                        ? null
-                        : _submit,
-                    child: s.saving
-                        ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : Text(
-                            'Assign ${s.selectedVesselIds.length} vessel(s)',
-                          ),
-                  ),
-                ),
-              ),
-            ),
     );
   }
 
@@ -202,3 +156,67 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 }
+
+// class DashboardScreen extends ConsumerWidget {
+//   const DashboardScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final isAdmin = ref.watch(isAdminProvider);
+
+//     if (!isAdmin) {
+//       return Scaffold(body: Center(child: Text('Access denied')));
+//     }
+
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Dashboard')),
+//       body: ListView(children: [_buildHeader(context), const Divider()]),
+//     );
+//   }
+
+//   Widget _buildHeader(BuildContext context) {
+//     return Container();
+//   }
+// }
+
+// body: s.loading
+//     ? const Center(child: CircularProgressIndicator())
+//     : s.error != null && s.users.isEmpty
+//     ? Center(
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             Text(s.error!, textAlign: TextAlign.center),
+//             const SizedBox(height: 12),
+//             ElevatedButton(
+//               onPressed: notifier.loadInitial,
+//               child: const Text('Retry'),
+//             ),
+//           ],
+//         ),
+//       )
+//     : _buildForm(s, notifier),
+// bottomNavigationBar: s.loading
+//     ? null
+//     : SafeArea(
+//         child: Padding(
+//           padding: const EdgeInsets.all(16),
+//           child: SizedBox(
+//             height: 48,
+//             child: ElevatedButton(
+//               onPressed: (s.selectedUser == null || s.saving)
+//                   ? null
+//                   : _submit,
+//               child: s.saving
+//                   ? const SizedBox(
+//                       width: 22,
+//                       height: 22,
+//                       child: CircularProgressIndicator(strokeWidth: 2),
+//                     )
+//                   : Text(
+//                       'Assign ${s.selectedVesselIds.length} vessel(s)',
+//                     ),
+//             ),
+//           ),
+//         ),
+//       ),
