@@ -33,18 +33,18 @@ class Vessel {
   factory Vessel.fromJson(Map<String, dynamic> json) => Vessel(
     mmsi: json['mmsi'] as String,
     imo: json['imo']?.toString(),
-    name: (json['name'] ?? '') as String,
-    type: _parseVesselType(json['type']),
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
-    speedKnots: (json['speedKnots'] as num).toDouble(),
-    courseDegrees: (json['courseDegrees'] as num).toDouble(),
-    destination: json['destination']?.toString(),
-    status: _parseVesselStatus(json['status']),
+    name: (json['name'] ?? 'UNKNOWN') as String,
+    type: _parseType(json['type']),
+    latitude: (json['lat'] as num).toDouble(),
+    longitude: (json['lon'] as num).toDouble(),
+    speedKnots: (json['speed'] as num?)?.toDouble() ?? 0,
+    courseDegrees: (json['course'] as num?)?.toDouble() ?? 0,
+    destination: json['destination']?.toString() ?? '',
+    status: _parseStatus(json['status']),
     lastReport: DateTime.parse(json['lastReport'] as String),
   );
 
-  static VesselType _parseVesselType(dynamic value) {
+  static VesselType _parseType(dynamic value) {
     switch (value?.toString().toLowerCase()) {
       case 'cargo':
         return VesselType.cargo;
@@ -61,7 +61,7 @@ class Vessel {
     }
   }
 
-  static VesselStatus _parseVesselStatus(dynamic value) {
+  static VesselStatus _parseStatus(dynamic value) {
     switch (value?.toString().toLowerCase()) {
       case 'docked':
         return VesselStatus.docked;

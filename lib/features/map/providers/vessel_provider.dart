@@ -4,7 +4,7 @@ import 'package:ship_tracker/core/models/vessel.dart';
 /// Mock vessel data around a busy shipping lane (Singapore Strait area)
 /// so markers appear naturally clustered — good for testing clustering
 /// behavior before Phase 3 wires in real MarineTraffic data.
-final List<Vessel> _mockVessels = [
+List<Vessel> _buildMockVessels() => [
   // ─────────────────────────────────────────────
   // Cluster 1 - West of Colombo
   // ─────────────────────────────────────────────
@@ -116,7 +116,7 @@ final List<Vessel> _mockVessels = [
 
 /// Raw vessel list. In Phase 3 this becomes a FutureProvider/StreamProvider
 /// that calls the MarineTraffic API (via your backend) instead of mock data.
-final vesselListProvider = Provider<List<Vessel>>((ref) => _mockVessels);
+final vesselListProvider = Provider<List<Vessel>>((ref) => _buildMockVessels());
 
 /// Currently active type filters. Empty set = show all types.
 final activeFiltersProvider = StateProvider<Set<VesselType>>((ref) => {});
