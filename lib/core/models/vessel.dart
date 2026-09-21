@@ -29,6 +29,46 @@ class Vessel {
     required this.status,
     required this.lastReport,
   });
+
+  factory Vessel.fromJson(Map<String, dynamic> json) => Vessel(
+    mmsi: json['mmsi'] as String,
+    imo: json['imo']?.toString(),
+    name: (json['name'] ?? '') as String,
+    type: _parseVesselType(json['type']),
+    latitude: (json['latitude'] as num).toDouble(),
+    longitude: (json['longitude'] as num).toDouble(),
+    speedKnots: (json['speedKnots'] as num).toDouble(),
+    courseDegrees: (json['courseDegrees'] as num).toDouble(),
+    destination: json['destination']?.toString(),
+    status: _parseVesselStatus(json['status']),
+    lastReport: DateTime.parse(json['lastReport'] as String),
+  );
+
+  static VesselType _parseVesselType(dynamic value) {
+    switch (value?.toString().toLowerCase()) {
+      case 'cargo':
+        return VesselType.cargo;
+      case 'tanker':
+        return VesselType.tanker;
+      case 'passenger':
+        return VesselType.passenger;
+      case 'fishing':
+        return VesselType.fishing;
+      case 'pleasurecraft':
+        return VesselType.pleasureCraft;
+      default:
+        return VesselType.other;
+    }
+  }
+
+  static VesselStatus _parseVesselStatus(dynamic value) {
+    switch (value?.toString().toLowerCase()) {
+      case 'docked':
+        return VesselStatus.docked;
+      default:
+        return VesselStatus.active;
+    }
+  }
 }
 
 enum VesselStatus {
