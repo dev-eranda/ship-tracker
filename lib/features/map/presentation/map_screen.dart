@@ -9,7 +9,7 @@ import 'package:ship_tracker/features/map/widgets/vessel_marker.dart';
 import 'package:ship_tracker/features/map/widgets/vessel_preview_sheet.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
-  const new({super.key});
+  const MapScreen({super.key});
 
   @override
   ConsumerState<MapScreen> createState() => _MapScreenState();
@@ -18,6 +18,12 @@ class MapScreen extends ConsumerStatefulWidget {
 class _MapScreenState extends ConsumerState<MapScreen> {
   final MapController _mapController = MapController();
   static const LatLng _initialCenter = LatLng(6.9497, 79.8425);
+
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               minZoom: 3,
               maxZoom: 15,
               onTap: (_, _) {
-                ref.watch(selectedVesselProvider.notifier).state = null;
+                ref.read(selectedVesselProvider.notifier).state = null;
               },
             ),
             children: [

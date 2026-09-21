@@ -23,3 +23,17 @@ class DashboardScreen extends ConsumerWidget {
     return Container();
   }
 }
+
+// class DashboardScreena extends ConsumerStatefulWidget {
+//   const DashboardScreena({super.key});
+
+//   @override
+//   ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
+// }
+
+// class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }

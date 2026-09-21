@@ -15,11 +15,16 @@ class LoginScreen extends ConsumerWidget {
         children: DevUsers.all.map((user) {
           return Card(
             child: ListTile(
-              leading: CircleAvatar(child: Text(user.name[0])),
+              leading: CircleAvatar(
+                child: Text(
+                  user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
+                ),
+              ),
               title: Text(user.name),
               subtitle: Text(user.role.name.toUpperCase()),
               onTap: () {
                 ref.read(authProvider.notifier).login(user);
+                if (!context.mounted) return;
                 Navigator.of(context).pushReplacementNamed('/home');
               },
             ),
