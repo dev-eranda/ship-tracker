@@ -1,4 +1,3 @@
-// core/providers/dev_users.dart
 import 'package:ship_tracker/core/models/user.dart';
 
 class DevUsers {

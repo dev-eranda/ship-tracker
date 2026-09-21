@@ -1,11 +1,26 @@
+enum UserRole { admin, user }
+
 class User {
   final String id;
   final String name;
   final UserRole role;
 
-  const User({required this.id, required this.name, required this.role});
+  const User({required this.id, required this.name, this.role = UserRole.user});
 
   bool get isAdmin => role == UserRole.admin;
-}
 
-enum UserRole { admin, user }
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    id: json['id'] as String,
+    name: (json['name'] ?? json['username'] ?? '') as String,
+    role: _parseRole(json['role']),
+  );
+
+  static UserRole _parseRole(dynamic value) {
+    switch (value.toString().toLowerCase()) {
+      case 'admin':
+        return UserRole.admin;
+      default:
+        return UserRole.user;
+    }
+  }
+}

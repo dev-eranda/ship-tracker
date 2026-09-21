@@ -10,12 +10,16 @@ class DashboardScreen extends ConsumerWidget {
     final isAdmin = ref.watch(isAdminProvider);
 
     if (!isAdmin) {
-      return const Scaffold(body: Center(child: Text('Access denied')));
+      return Scaffold(body: Center(child: Text('Access denied')));
     }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Dashboard')),
-      body: const Center(child: Text('Admin content here')),
+      body: ListView(children: [_buildHeader(context), const Divider()]),
     );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Container();
   }
 }
