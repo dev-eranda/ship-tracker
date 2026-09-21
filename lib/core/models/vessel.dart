@@ -4,6 +4,7 @@
 /// (MMSI, IMO, SPEED, COURSE, etc.) so mapping the real API response
 /// onto this model later (Phase 3) is straightforward.
 class Vessel {
+  final int id;
   final String mmsi;
   final String? imo;
   final String name;
@@ -17,6 +18,7 @@ class Vessel {
   final DateTime lastReport;
 
   const Vessel({
+    required this.id,
     required this.mmsi,
     this.imo,
     required this.name,
@@ -31,6 +33,7 @@ class Vessel {
   });
 
   factory Vessel.fromJson(Map<String, dynamic> json) => Vessel(
+    id: json['id'] as int,
     mmsi: json['mmsi'] as String,
     imo: json['imo']?.toString(),
     name: (json['name'] ?? 'UNKNOWN') as String,

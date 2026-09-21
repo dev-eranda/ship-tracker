@@ -6,6 +6,7 @@ final assignedVesselsProvider = FutureProvider((ref) async {
 
   return [
     Vessel(
+      id: 1,
       mmsi: '563012354',
       imo: '9321489',
       name: 'Southern Cross',
@@ -19,6 +20,7 @@ final assignedVesselsProvider = FutureProvider((ref) async {
       lastReport: DateTime.now().subtract(const Duration(minutes: 6)),
     ),
     Vessel(
+      id: 2,
       mmsi: '563012355',
       imo: '',
       name: 'Coastal Runner',

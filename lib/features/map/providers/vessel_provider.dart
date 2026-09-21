@@ -9,6 +9,7 @@ List<Vessel> _buildMockVessels() => [
   // Cluster 1 - West of Colombo
   // ─────────────────────────────────────────────
   Vessel(
+    id: 1,
     mmsi: '563012345',
     imo: '9321483',
     name: 'PACIFIC VOYAGER',
@@ -22,6 +23,7 @@ List<Vessel> _buildMockVessels() => [
     lastReport: DateTime.now().subtract(const Duration(minutes: 3)),
   ),
   Vessel(
+    id: 2,
     mmsi: '563012346',
     imo: '9321484',
     name: 'NORDIC STAR',
@@ -35,6 +37,7 @@ List<Vessel> _buildMockVessels() => [
     lastReport: DateTime.now().subtract(const Duration(minutes: 1)),
   ),
   Vessel(
+    id: 3,
     mmsi: '563012347',
     name: 'ISLAND FERRY 3',
     type: VesselType.passenger,
@@ -51,6 +54,7 @@ List<Vessel> _buildMockVessels() => [
   // Cluster 2 - South-West of Colombo
   // ─────────────────────────────────────────────
   Vessel(
+    id: 4,
     mmsi: '563012349',
     name: 'BLUE MARLIN',
     type: VesselType.fishing,
@@ -67,6 +71,7 @@ List<Vessel> _buildMockVessels() => [
   // Cluster 3 - North-West of Colombo
   // ─────────────────────────────────────────────
   Vessel(
+    id: 5,
     mmsi: '563012353',
     imo: '9321488',
     name: 'EASTERN GLORY',
@@ -84,6 +89,7 @@ List<Vessel> _buildMockVessels() => [
   // Isolated vessel - South of Colombo
   // ─────────────────────────────────────────────
   Vessel(
+    id: 6,
     mmsi: '563012354',
     imo: '9321489',
     name: 'SOUTHERN CROSS',
@@ -101,6 +107,7 @@ List<Vessel> _buildMockVessels() => [
   // Isolated vessel - North of Colombo
   // ─────────────────────────────────────────────
   Vessel(
+    id: 7,
     mmsi: '563012355',
     name: 'COASTAL RUNNER',
     type: VesselType.passenger,
